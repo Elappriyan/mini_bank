@@ -1,3 +1,0 @@
-Enter your name:Admin
-Enter your acc_no:Admin@123
-Enter your password:& "C:/Program Files/Python313/python.exe" "z:/mini bank/mini.py"

@@ -1,8 +1,8 @@
 
 
-balance = 0
+# balance = 0
 
-##======Admin user and password=================#####
+# #======Admin user and password=================#####
 # admin_username = "Admin"
 # admin_password = "Admin@123"
 
@@ -93,95 +93,95 @@ balance = 0
     
 
 
-# #####===================== Customer_Menu=============================
+# # #####===================== Customer_Menu=============================
 
-def show_balance(balance):
-    print('************************')
-    print(f"Your balance is Rs{balance:.2f}")
-    print('************************')
-
-
+# def show_balance(balance):
+#     print('************************')
+#     print(f"Your balance is Rs{balance:.2f}")
+#     print('************************')
 
 
-def deposit():
+
+
+# def deposit():
  
-    print('************************')
-    amount =float(input("Enter an amount to be deposited: "))
-    print('************************')
+#     print('************************')
+#     amount =float(input("Enter an amount to be deposited: "))
+#     print('************************')
 
-    if amount < 0:
-        print('************************')
-        print("That is not a valid amount")
-        print('************************')
-        return 0
-    else:
-           return amount
-
-
+#     if amount < 0:
+#         print('************************')
+#         print("That is not a valid amount")
+#         print('************************')
+#         return 0
+#     else:
+#            return amount
 
 
-def  withdraw(balance):
+
+
+# def  withdraw(balance):
    
-    print('************************')
-    amount = float(input("Enter amount to be withdraw: "))
-    print('************************')
+#     print('************************')
+#     amount = float(input("Enter amount to be withdraw: "))
+#     print('************************')
 
-    if amount > balance:
-        print('************************')
-        print(" insufficient funds")
-        print('************************')
-        return 0
-    elif amount < 0:
-        print('************************')
-        print("Amonut must be greater than 0")
-        print('************************')
-        return 0
-    else:
-        return amount
-
-
-def money():
-    history=[]
-    balance = 0
-    is_running = True
-    amount={}
-    while is_running :
-        print('************************')
-        print(" ===Customer Menu===")
-        print('************************')
-        print("1.Show Balance")
-        print("2.Deposit")
-        print("3.Withdraw")
-        print("4.Transaction History")
-        print("5.Exit")
-        print('************************')
-        choose = input("Enter your choose(1-5):")
+#     if amount > balance:
+#         print('************************')
+#         print(" insufficient funds")
+#         print('************************')
+#         return 0
+#     elif amount < 0:
+#         print('************************')
+#         print("Amonut must be greater than 0")
+#         print('************************')
+#         return 0
+#     else:
+#         return amount
 
 
-        if choose =='1':
-            show_balance(balance)
-        elif choose =='2':
-          balance += deposit()
-          history.append(f"Deposited Rs ")
-        elif choose =='3':
-            balance -= withdraw(balance)
-            history.append(f"Withdraw Rs ")
-        elif choose =='4':
-             for i in history:
-                 print("-",i)
+# def money():
+#     history=[]
+#     balance = 0
+#     is_running = True
+#     amount={}
+#     while is_running :
+#         print('************************')
+#         print(" ===Customer Menu===")
+#         print('************************')
+#         print("1.Show Balance")
+#         print("2.Deposit")
+#         print("3.Withdraw")
+#         print("4.Transaction History")
+#         print("5.Exit")
+#         print('************************')
+#         choose = input("Enter your choose(1-5):")
+
+
+#         if choose =='1':
+#             show_balance(balance)
+#         elif choose =='2':
+#           balance += deposit()
+#           history.append(f"Deposited Rs ")
+#         elif choose =='3':
+#             balance -= withdraw(balance)
+#             history.append(f"Withdraw Rs ")
+#         elif choose =='4':
+#              for i in history:
+#                  print("-",i)
     
-        elif choose =='5':
-            is_running =False
-        else: 
-            print('************************')
-            print(" Not a valid choice") 
-            print('************************')
+#         elif choose =='5':
+#             is_running =False
+#         else: 
+#             print('************************')
+#             print(" Not a valid choice") 
+#             print('************************')
 
-    print('************************')
-    print("Thank you! have a nice day")
-    print('************************')
+#     print('************************')
+#     print("Thank you! have a nice day")
+#     print('************************')
 
 
-money()
+# money()
 
 
