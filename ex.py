@@ -1,3 +1,5 @@
+import datetime
+
 balance = 0
 
 ##======Admin user and password=================#####
@@ -55,8 +57,7 @@ while True:
         
     
         
-        import random
-        customer_id=str(random.randint(1000,9999))
+       
         print(f"{Full_Name} Your Customer_ID: {customer_id}")
 
         customer_Details={"Customer_Name":Full_Name, "NIC": NIC_NO , "Phone_Number":Phone_No , "Customer_ID":customer_id }
@@ -139,8 +140,12 @@ def withdraw(balance):
 
 
 def Transaction_History(account_number, last_deposit, last_withdraw, balance):
+
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    #global customer_id 
     with open("Transaction History.txt", "a") as file:
         file.write(
+            f"Date | Time: {current_time} | "
             f"Account: {account_number} | "
             f"Deposit: Rs.{last_deposit:.2f} | "
             f"Withdraw: Rs.{last_withdraw:.2f} | "
