@@ -2,35 +2,67 @@ import datetime
 
 balance = 0
 
-##======Admin user and password=================#####
-admin_username = "Admin"
-admin_password = "Admin@123"
-
-with open("admin.txt", 'w') as file:
-    file.write(f"{admin_username},{admin_password}\n")
+import hashlib
 import getpass
+import random
 
-def checkusernameexist(username):
+
+
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+
+
+def checkusernameexist(username, admin_username):
     return username == admin_username
 
-def checkPassword(password):
-    return password == admin_password
 
+
+def checkPassword(password, admin_password_hash):
+    return hash_password(password) == admin_password_hash
+
+
+
+def create_customer(Full_Name, NIC_NO, Phone_No):
+    customer_id = str(random.randint(1000, 9999))
+    print(f"{Full_Name}, your Customer_ID is: {customer_id}")
+
+    with open("customer.txt", "a") as file:
+        file.write(f"{customer_id},{Full_Name},{NIC_NO},{Phone_No}\n")
+    
+
+
+
+#===================================================== Function to login=======================================================
 def login():
-    username=input("Enter username: ")
-    password=getpass.getpass("Enter password: ")
+    
+    admin_username = "Admin"
+    admin_password = "Admin@123"  
+    admin_password_hash = hash_password(admin_password)  
+    
+    
+    with open("admin.txt", "w") as file:
+        file.write(f"{admin_username},{admin_password_hash}\n")
 
-    if checkusernameexist(username):
-        if checkPassword(password):
-            print()
-            print(f"{username} Welcome")
+    
+    username = input("Enter username: ")
+    password = getpass.getpass("Enter password: ")
+
+    
+    if checkusernameexist(username, admin_username):
+        if checkPassword(password, admin_password_hash):
+            print(f"{username}, Welcome!")
         else:
             print("Invalid password")
-            return
+            return False
     else:
-        print("Invild username")
-        return
-login()
+        print("Invalid username")
+        return False
+    
+
+
+login()  ##===========================login function colse==========================================================================
+
 
 
 
@@ -38,7 +70,7 @@ login()
 
 customer_Details = {}
 balance={}
-customer_id=()
+customer_id={}
 while True:
     print("\n =====Admin Menu=====")
     print("1.Create Customer") 
@@ -54,18 +86,9 @@ while True:
         Full_Name = input("Enter Your Full Name:")
         NIC_NO = input("Enter Your NIC NO:")
         Phone_No = input("Enter Your Phone NO:")
-        
+        create_customer(Full_Name, NIC_NO, Phone_No)
+
     
-        
-       
-        print(f"{Full_Name} Your Customer_ID: {customer_id}")
-
-        customer_Details={"Customer_Name":Full_Name, "NIC": NIC_NO , "Phone_Number":Phone_No , "Customer_ID":customer_id }
-
-        with open("customer.txt", "a") as file:
-            
-            file.write(f"{customer_id},{Full_Name},{NIC_NO},{Phone_No}\n")
-           
 
     elif choice == 2:
         print("****************************")
@@ -86,7 +109,7 @@ while True:
         break
     else:
         print("invalid choice")
-
+##=============================== Admin colse=====================================================
     
 # #####===================== Customer_Menu============================================
 import random
@@ -94,9 +117,13 @@ last_deposit= 0
 last_withdraw= 0
 account_number=None
 
+
+
 def Account_Create():
     return   str(random.randint(10000000,99999999))
 account_number=Account_Create()
+
+
 
 
 def show_balance(balance):
@@ -104,6 +131,8 @@ def show_balance(balance):
     print(f"Your balance is Rs{balance:.2f}")
     print('************************')
     
+
+
 
 def deposit():
     deposit= last_deposit 
@@ -118,6 +147,9 @@ def deposit():
         return 0
     else:
         return amount
+
+
+
 
 def withdraw(balance):
     withdraw =last_withdraw
@@ -139,19 +171,33 @@ def withdraw(balance):
         return amount
 
 
+
+
 def Transaction_History(account_number, last_deposit, last_withdraw, balance):
 
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     #global customer_id 
     with open("Transaction History.txt", "a") as file:
         file.write(
-            f"Date | Time: {current_time} | "
+            f"Date | Time: {current_time} | " 
             f"Account: {account_number} | "
             f"Deposit: Rs.{last_deposit:.2f} | "
             f"Withdraw: Rs.{last_withdraw:.2f} | "
             f"Balance: Rs.{balance:.2f}\n"
             )
-            
+
+
+
+##======================================= read file=============================================================
+
+def read_transaction_history():
+    try:
+        with open("Transaction History.txt", "r") as file:
+            transaction_history = file.readlines()
+            for transaction in transaction_history:
+                print(transaction.strip())  
+    except FileNotFoundError:
+       print("Transaction History file not found.")
 
 def money():
     customer_id = None
@@ -193,8 +239,10 @@ def money():
             print("Transaction History:")
             for i in history:
                 print("-", i)
+            
 
             Transaction_History(account_number, last_deposit, last_withdraw, balance)
+            read_transaction_history()
             
         elif choose == '6':
             is_running = False

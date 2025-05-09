@@ -1,0 +1,3 @@
+Date | Time: 2025-05-09 14:47:09 | Account: 94626785 | Deposit: Rs.3000.00 | Withdraw: Rs.1000.00 | Balance: Rs.2000.00
+Date | Time: 2025-05-09 14:54:09 | Account: 79562987 | Deposit: Rs.1000.00 | Withdraw: Rs.500.00 | Balance: Rs.500.00
+Date | Time: 2025-05-09 15:05:36 | Account: 87090614 | Deposit: Rs.10000.00 | Withdraw: Rs.2000.00 | Balance: Rs.8000.00
